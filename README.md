@@ -1,113 +1,114 @@
 <p align="center">
-  <a href="README.md">🇹🇷 <b>Türkçe</b></a> | <a href="README.en.md">🇬🇧 <b>English</b></a>
+  <a href="README.md">🇬🇧 <b>English</b></a> | <a href="README.tr.md">🇹🇷 <b>Türkçe</b></a>
 </p>
 
-# 🧬 AHIEN AI — Onkoloji Klinik Karar Destek RAG Sistemi
+# 🧬 AHIEN AI — Clinical Oncology Decision Support RAG System
 
 <div align="center">
 
 [![Award](https://img.shields.io/badge/Award-4th%20Place%20Finalist%20%F0%9F%8F%85-teal?style=for-the-badge&labelColor=1a1a1a)](https://github.com/merwanted/ahien-ai)
 [![Event](https://img.shields.io/badge/Event-DataMedX%20Hackathon%202-red?style=for-the-badge&labelColor=1a1a1a)](https://github.com/merwanted/ahien-ai)
-[![Location](https://img.shields.io/badge/Host-İstinye%20Üniversitesi-0A66C2?style=for-the-badge&labelColor=1a1a1a)](https://github.com/merwanted/ahien-ai)
+[![Location](https://img.shields.io/badge/Host-%C4%B0stinye%20University-0A66C2?style=for-the-badge&labelColor=1a1a1a)](https://github.com/merwanted/ahien-ai)
 [![Team](https://img.shields.io/badge/Team-SOL%20CADENTE-orange?style=for-the-badge&labelColor=1a1a1a)](https://github.com/merwanted/ahien-ai)
 [![Status](https://img.shields.io/badge/Type-Clinical%20AI%20Prototype-success?style=for-the-badge&labelColor=1a1a1a)](https://github.com/merwanted/ahien-ai)
 
 <p align="center">
-  <b>DataMedX Hackathon 2 (İstinye Üniversitesi) 4.lük Derecesi Kazanan Proje</b><br/>
-  <i>Onkoloji hasta kayıtları, laboratuvar testleri ve tedavi protokolleri üzerinde halüsinasyonsuz, kaynak gösteren RAG (Retrieval-Augmented Generation) karar destek asistanı.</i>
+  <b>4th Place Winning Clinical Decision Support Prototype at DataMedX Hackathon 2 (İstinye University)</b><br/>
+  <i>Retrieval-Augmented Generation (RAG) assistant delivering verifiable, hallucination-guarded clinical answers with explicit patient record citations across oncology labs and therapy protocols.</i>
 </p>
 
 </div>
 
 ---
 
-> ⚠️ **Proje Durumu:** Bu depo, **DataMedX Hackathon 2** kapsamında **SOL CADENTE** takımı tarafından 48 saatlik yarışma maratonunda geliştirilmiş ve jüriye sunulmuş **çalışan bir tıbbi karar destek prototipidir (Competition MVP / Research Demo)**. Doğrudan klinik tanı amacıyla kullanılamaz; yarışma sunum ve değerlendirme amacıyla tasarlanmıştır.
+> ⚠️ **Project Status:** This repository contains a **functional medical decision support prototype (Competition MVP / Research Demo)** developed by team **SOL CADENTE** during the 48-hour **DataMedX Health Hackathon 2**. It is designed strictly for technical jury evaluation and academic exploration, not for autonomous clinical diagnostic practice.
 
 ---
 
-## 📌 Problem & Klinik Çözüm
+## 📌 Clinical Challenge & Solution Vision
 
-### Klinik Zorluk
-Onkoloji kliniklerinde hekimler ve sağlık profesyonelleri; yüzlerce hastaya ait karmaşık kan tahlilleri (HbA1c, kreatinin, karaciğer enzimleri vb.), epikriz dökümleri, kemoterapi/ilaç protokolleri ve geçmiş medikal işlemlerle karşılaşır. Standart üretken yapay zekâ (LLM) modelleri tıbbi verilerde **halüsinasyon (uydurma bilgi)** riski taşır ve kaynak gösteremez.
+### The Clinical Bottleneck
+Oncologists and healthcare practitioners regularly review vast volumes of disparate clinical data per patient: panel biochemistry tests (HbA1c, serum creatinine, hepatic enzymes), longitudinal epicrises, chemotherapy regimens, and historical interventions. Standard generative language models pose critical risks of **medical hallucination** and cannot supply verifiable references to source documents.
 
-### AHIEN AI Çözümü
-**AHIEN AI**, hastaya ait gerçek klinik kayıtları vektör uzayında anlamsal olarak indeksleyen ve dil modellerine katı tıbbi güvenlik kuralları getiren bir **RAG (Retrieval-Augmented Generation)** mimarisidir:
-- **Sıfır Halüsinasyon Prensibi:** Model yalnızca vektör veritabanından çekilen doğrulanmış hasta dökümlerine dayanarak yanıt üretir. Veri setinde olmayan bilgiler için açıkça uyarı verir.
-- **Kesin Kaynak Gösterimi:** Her yanıtın altında doğrudan `[Kaynak: Hasta #ID - Veri Tipi]` şeklinde doğrulanabilir klinik referans sunar.
-- **Çok Modlu Onkoloji Filtreleme:** Karaciğer, Meme, Multipl Miyelom, Over ve Prostat kanseri kategorilerine göre sorguları filtreleyebilir.
+### The AHIEN AI Approach
+**AHIEN AI** deploys an enterprise-grade **Retrieval-Augmented Generation (RAG)** pipeline enforcing strict clinical safety guardrails:
+- **Zero-Hallucination Policy:** The LLM is restricted to answering exclusively using context retrieved from the indexed patient vector space. Out-of-corpus queries return explicit disclaimers.
+- **Strict Evidence Citations:** Every assertion includes deterministic citations referencing verified records: `[Source: Patient #ID - Record Category]`.
+- **Multimodal Oncology Filtering:** Allows clinicians to segment queries by cancer cohort: Hepatic, Breast, Multiple Myeloma, Ovarian, and Prostate.
 
 ---
 
-## 🏗️ Sistem Mimarisi & RAG Boru Hattı
+## 🏗️ System Architecture & RAG Pipeline
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                        AHIEN AI RAG MİMARİSİ                           │
+│                         AHIEN AI RAG ARCHITECTURE                      │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
     ┌───────────────────────────────┴───────────────────────────────┐
     ▼                                                               ▼
-【 1. VERİ İŞLEME & İNDEKSLEME 】                  【 2. SORGULAMA & ÜRETİM 】
-• ~500 Onkoloji Hasta Dosyası                      • Hekim / Kullanıcı Sorusu
-• Laboratuvar & Epikriz Ayrıştırma                 • BGE-M3 Anlamsal Vektör Arama
-• BGE-M3 Yoğun Vektör Temsili (Dense Embedding)    • ChromaDB Cosine Benzerlik Taraması
-• ChromaDB Persistent Vektör Koleksiyonu           • İlgili Bağlamın (Top-K) Çekilmesi
+【 1. DATA PROCESSING & INDEXING 】                 【 2. RETRIEVAL & QUERYING 】
+• ~500 Oncology Patient Records                     • Clinician Free-Text Query
+• Parsing Blood Panels & Epicrises                  • BGE-M3 Dense Semantic Encoding
+• BGE-M3 Dense Embeddings Extraction                • ChromaDB Cosine Similarity Search
+• ChromaDB Persistent Vector Collection             • Top-K Clinical Context Assembly
                                                                     │
                                                                     ▼
-                                                    【 3. GÜVENLİ LLM ÜRETİMİ 】
-                                                    • Katı Tıbbi Prompt Kalkanı
+                                                    【 3. GUARDED GENERATION 】
+                                                    • Medical Prompt Safety Shield
                                                     • FastAPI Server-Sent Events (SSE)
-                                                    • Kaynak Referanslı Akış Yanıtı
+                                                    • Real-time Streamed Citations
 ```
 
 ---
 
-## 🔬 Veri Seti Kapsamı
+## 🔬 Dataset Scope
 
-Prototip, hackathon kapsamında sağlanan ~500 onkoloji hastasının klinik verileri üzerinde çalışmaktadır:
-- **Kanser Grupları:** Karaciğer, Meme, Multipl Miyelom, Over, Prostat
-- **Veri Tipleri:** Demografik profiller, biyokimya laboratuvar sonuçları (HbA1c, Üre, Kreatinin, AST/ALT, Elektrolitler, CRP), ilaç tedavileri, uygulanan medikal prosedürler ve epikriz özetleri.
-
----
-
-## 🛠️ Teknik Yığın (Tech Stack)
-
-- **Backend & Servis:** Python 3.10+, FastAPI, Uvicorn, Asenkron HTTP (httpx)
-- **Vektör Veritabanı:** ChromaDB (Persistent Storage)
-- **Embedding Modeli:** BGE-M3 (Yerel çok dilli dense representation)
-- **Dil Modeli Motoru:** Ollama (Yerel Qwen/Llama veya Cloud Ollama modelleri)
-- **Arayüz (Frontend):** Modern HTML5, CSS3, Vanilla JS (Server-Sent Events / Streaming chat)
-- **Veri İşleme:** Pandas, OpenPyXL (`data_processor.py`)
+The prototype indexes structured and unstructured clinical data from ~500 anonymized oncology patient records provided during the competition:
+- **Cancer Cohorts:** Liver (Hepatic), Breast, Multiple Myeloma, Ovarian, Prostate.
+- **Data Categories:** Demographics, laboratory biochemistry panels (HbA1c, Urea, Creatinine, ALT/AST, Electrolytes, CRP), medication schedules, clinical procedures, and discharge summaries.
 
 ---
 
-## 💻 Yerel Geliştirme ve Çalıştırma
+## 🛠️ Technology Stack
 
-### 1. Gereksinimleri Yükleyin
+- **Backend & Services:** Python 3.10+, FastAPI, Uvicorn, Asynchronous HTTP (`httpx`)
+- **Vector Database:** ChromaDB (Persistent Disk Storage)
+- **Embedding Model:** BGE-M3 (Multilingual Dense Vector Representation)
+- **Inference Engine:** Ollama (Local quantized models / Qwen / Llama)
+- **Frontend HUD:** Modern Semantic HTML5, CSS3, Vanilla JS (Server-Sent Events streaming)
+- **Data Engineering:** Pandas, OpenPyXL (`data_processor.py`)
+
+---
+
+## 💻 Local Setup & Execution Guide
+
+### 1. Environment Setup
 ```bash
 git clone https://github.com/merwanted/ahien-ai.git
 cd ahien-ai
 
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Vektör Veritabanını İndeksleyin
+### 2. Index Clinical Vector Database
 ```bash
 python indexer.py
 ```
 
-### 3. API & Web Arayüzünü Başlatın
+### 3. Launch the API & Web Dashboard
 ```bash
 python server.py
 ```
-Sunucu başladığında tarayıcınızdan `http://localhost:8000` adresine giderek AHIEN AI arayüzünü test edebilirsiniz.
+Open `http://localhost:8000` in your web browser to interact with the AHIEN AI clinical query interface.
 
 ---
 
-## 🏆 Yarışma Başarısı & Takım
-Bu proje, **İstinye Üniversitesi** ev sahipliğinde düzenlenen **DataMedX Hackathon 2**'de sunulmuş ve jüri değerlendirmesi sonucunda **4.lük Derecesi** elde etmiştir.
+## 🏆 Competition Achievement & Team Credits
 
-* **Takım:** SOL CADENTE
-* **Mert Özemir Rolü:** RAG mimarisi, FastAPI backend altyapısı, ChromaDB vektör indeksleme ve prompt güvenliği tasarımı.
+This prototype achieved **🏅 4th Place** at **DataMedX Hackathon 2** hosted by **İstinye University** following live demonstrations and medical jury assessment.
+
+* **Team:** SOL CADENTE
+* **Role of Mert Özemir:** RAG pipeline architecture, FastAPI backend services, ChromaDB vector indexing, and medical prompt safety engineering.
