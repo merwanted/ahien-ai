@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataMedX - Yapay Zeka Destekli Onkoloji Analiz Platformu</title>
+    <meta name="description" content="DataMedX, onkoloji hastalarının klinik verilerini yapay zeka ile analiz eden akıllı medikal asistan platformudur.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/index.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-icon">🧬</span>
+                <span class="logo-text">Data<span class="accent">MedX</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#stats-section">İstatistikler</a>
+                <a href="#diseases">Kanser Türleri</a>
+                <a href="#how-it-works">Nasıl Çalışır</a>
+                <a href="#chatbot" class="nav-cta">Chatbot'u Dene</a>
+            </div>
+            <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-bg">
+            <div class="hero-particles" id="particles"></div>
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">🏥 Onkoloji Veri Analiz Platformu</div>
+            <h1>Yapay Zeka ile<br><span class="gradient-text">Onkoloji Verisi Analizi</span></h1>
+            <p class="hero-desc">DataMedX, 500 onkoloji hastasının klinik verilerini RAG (Retrieval-Augmented Generation) mimarisi ile analiz eden akıllı medikal asistan platformudur.</p>
+            <div class="hero-actions">
+                <a href="#chatbot" class="btn btn-primary">
+                    <span>💬</span> Chatbot'u Dene
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary">
+                    <span>📖</span> Nasıl Çalışır?
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-indicator"></div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section id="stats-section">
+        <div class="stats-container">
+            <div class="stat-card" data-target="500">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number" id="stat-patients">0</div>
+                <div class="stat-label">Hasta Kaydı</div>
+            </div>
+            <div class="stat-card" data-target="5">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-number" id="stat-cancers">0</div>
+                <div class="stat-label">Kanser Türü</div>
+            </div>
+            <div class="stat-card" data-target="54">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number" id="stat-params">0</div>
+                <div class="stat-label">Klinik Parametre</div>
+            </div>
+            <div class="stat-card" data-target="17">
+                <div class="stat-icon">🧪</div>
+                <div class="stat-number" id="stat-labs">0</div>
+                <div class="stat-label">Laboratuvar Testi</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disease Cards -->
+    <section id="diseases">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Kanser <span class="gradient-text">Türleri</span></h2>
+                <p>Veri setimizdeki 5 farklı kanser türü hakkında detaylı hasta verileri</p>
+            </div>
+            <div class="disease-grid">
+                <div class="disease-card" data-cancer="Karaciğer kanseri">
+                    <div class="disease-icon">🫁</div>
+                    <h3>Karaciğer Kanseri</h3>
+                    <p>Hepatoselüler karsinom ve intrahepatik safra yolları malign neoplazmları</p>
+                    <div class="disease-stats">
+                        <span class="disease-stat"><strong id="dc-karaciger">-</strong> hasta</span>
+                    </div>
+                    <div class="disease-tags">
+                        <span class="tag">HCC</span>
+                        <span class="tag">AFP</span>
+                        <span class="tag">Hepatit</span>
+                    </div>
+                </div>
+                <div class="disease-card" data-cancer="Meme Kanseri">
+                    <div class="disease-icon">🩺</div>
+                    <h3>Meme Kanseri</h3>
+                    <p>Meme bezinin malign neoplazmları, invaziv ve non-invaziv formlar</p>
+                    <div class="disease-stats">
+                        <span class="disease-stat"><strong id="dc-meme">-</strong> hasta</span>
+                    </div>
+                    <div class="disease-tags">
+                        <span class="tag">HER2</span>
+                        <span class="tag">ER/PR</span>
+                        <span class="tag">TNM</span>
+                    </div>
+                </div>
+                <div class="disease-card" data-cancer="Multipl miyelom">
+                    <div class="disease-icon">🔬</div>
+                    <h3>Multipl Miyelom</h3>
+                    <p>Kemik iliğindeki plazma hücrelerinin malign proliferasyonu</p>
+                    <div class="disease-stats">
+                        <span class="disease-stat"><strong id="dc-miyelom">-</strong> hasta</span>
+                    </div>
+                    <div class="disease-tags">
+                        <span class="tag">M-protein</span>
+                        <span class="tag">Bence Jones</span>
+                        <span class="tag">ISS</span>
+                    </div>
+                </div>
+                <div class="disease-card" data-cancer="Over kanseri">
+                    <div class="disease-icon">🧬</div>
+                    <h3>Over Kanseri</h3>
+                    <p>Yumurtalık malign neoplazmları, epitelyal ve non-epitelyal türler</p>
+                    <div class="disease-stats">
+                        <span class="disease-stat"><strong id="dc-over">-</strong> hasta</span>
+                    </div>
+                    <div class="disease-tags">
+                        <span class="tag">CA-125</span>
+                        <span class="tag">BRCA</span>
+                        <span class="tag">Seröz</span>
+                    </div>
+                </div>
+                <div class="disease-card" data-cancer="Prostat kanseri">
+                    <div class="disease-icon">⚕️</div>
+                    <h3>Prostat Kanseri</h3>
+                    <p>Prostat bezinin malign neoplazmları, adenokarsinom</p>
+                    <div class="disease-stats">
+                        <span class="disease-stat"><strong id="dc-prostat">-</strong> hasta</span>
+                    </div>
+                    <div class="disease-tags">
+                        <span class="tag">PSA</span>
+                        <span class="tag">Gleason</span>
+                        <span class="tag">ADT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Nasıl <span class="gradient-text">Çalışır?</span></h2>
+                <p>RAG (Retrieval-Augmented Generation) mimarisi ile doğru ve güvenilir yanıtlar</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">📄</div>
+                    <h3>Veri İşleme</h3>
+                    <p>500 hastanın klinik verileri akıllı chunk'lara dönüştürülür: profil, laboratuvar, ilaç, epikriz ve işlemler.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">🔍</div>
+                    <h3>Semantik Arama</h3>
+                    <p>BGE-M3 embedding modeli ile sorunuz analiz edilir ve ChromaDB'den en ilgili hasta verileri bulunur.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">🤖</div>
+                    <h3>AI Yanıt Üretimi</h3>
+                    <p>Bulunan veriler LLM'e bağlam olarak verilir ve doğru, kaynağa dayalı yanıtlar üretilir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot Section -->
+    <section id="chatbot">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Medikal <span class="gradient-text">Asistan</span></h2>
+                <p>Onkoloji veri seti hakkında sorularınızı sorun</p>
+            </div>
+
+            <div class="chat-wrapper">
+                <!-- Filter bar -->
+                <div class="chat-filters">
+                    <label>Kanser Türü Filtresi:</label>
+                    <select id="cancer-filter">
+                        <option value="all">Tüm Kanser Türleri</option>
+                        <option value="Karaciğer kanseri">Karaciğer Kanseri</option>
+                        <option value="Meme Kanseri">Meme Kanseri</option>
+                        <option value="Multipl miyelom">Multipl Miyelom</option>
+                        <option value="Over kanseri">Over Kanseri</option>
+                        <option value="Prostat kanseri">Prostat Kanseri</option>
+                    </select>
+                    <div class="chat-status" id="chat-status">
+                        <span class="status-dot"></span>
+                        <span id="status-text">Bağlanıyor...</span>
+                    </div>
+                </div>
+
+                <!-- Chat area -->
+                <div class="chat-container" id="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message bot-message">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <p>Merhaba! Ben DataMedX Medikal Asistan. Onkoloji veri setimiz hakkında sorularınızı yanıtlayabilirim.</p>
+                                <p>Örneğin kanser türleri, laboratuvar değerleri, ilaç tedavileri veya hasta profilleri hakkında sorabilirsiniz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example questions -->
+                <div class="example-questions" id="example-questions">
+                    <button class="example-btn" data-q="Karaciğer kanseri hastalarının en sık kullandığı ilaçlar nelerdir?">💊 Karaciğer kanseri ilaçları</button>
+                    <button class="example-btn" data-q="Meme kanseri hastalarında kreatinin değerleri nasıl bir trend gösteriyor?">🧪 Meme kanseri lab değerleri</button>
+                    <button class="example-btn" data-q="Multipl miyelom hastalarının eşlik eden tanıları nelerdir?">📋 Miyelom eşlik eden tanılar</button>
+                    <button class="example-btn" data-q="Prostat kanseri hastalarının yaş dağılımı ve tedavi süreçleri nasıl?">📊 Prostat kanseri profili</button>
+                </div>
+
+                <!-- Input area -->
+                <div class="chat-input-area">
+                    <div class="chat-input-wrapper">
+                        <textarea id="chat-input" placeholder="Sorunuzu yazın..." rows="1" maxlength="1000"></textarea>
+                        <button id="send-btn" class="send-btn" aria-label="Gönder">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="chat-disclaimer">DataMedX yalnızca veri setindeki bilgilere dayalı yanıtlar üretir. Tıbbi tavsiye değildir.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-icon">🧬</span>
+                <span class="logo-text">Data<span class="accent">MedX</span></span>
+            </div>
+            <p>RAG Tabanlı Onkoloji Medikal Asistan Platformu</p>
+            <div class="footer-tech">
+                <span>Ollama</span>
+                <span>BGE-M3</span>
+                <span>ChromaDB</span>
+                <span>FastAPI</span>
+            </div>
+            <p class="footer-copy">&copy; 2026 DataMedX. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
